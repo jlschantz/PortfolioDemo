@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Portfolio</string>
+
+    <!-- nav drawer tags -->
+    <string name="navigation_drawer_open">Drawer Open</string>
+    <string name="navigation_drawer_close">Drawer Closed</string>
+
+    <!-- fragment tags -->
+    <string name="fragment_albums">Fragment Albums</string>
+    <string name="fragment_users">Fragment Users</string>
+
+    <string name="error_text">An error has occurred. Please try again later.</string>
+    <string name="error_text_ok">OK</string>
+    <string name="no_data_available">No data available.\n Please try again later.</string>
+</resources>
