@@ -13,7 +13,6 @@ import com.jacob.portfolio.R
 import com.jacob.portfolio.models.PhotoItem
 import kotlinx.android.synthetic.main.item_photo.view.*
 
-
 class PhotosAdapter (private var list: List<PhotoItem>,
                      private val listener : OnItemClickListener,
                      private val context : Context) : RecyclerView.Adapter<PhotosAdapter.ItemViewHolder>() {
@@ -33,7 +32,7 @@ class PhotosAdapter (private var list: List<PhotoItem>,
 
         val url = GlideUrl(
             item.thumbnailUrl, LazyHeaders.Builder()
-                .addHeader("User-Agent", "your-user-agent")
+                .addHeader("User-Agent", "user-agent")
                 .build()
         )
         Glide.with(context)

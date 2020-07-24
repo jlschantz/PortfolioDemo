@@ -5,5 +5,5 @@ import com.jacob.portfolio.models.UserItem
 
 interface MainInterface {
     fun goToPhotosForAlbum(albumItem: AlbumItem)
-    fun goToPhotosForUser(userItem: UserItem)
+    fun goToDetailForUser(userItem: UserItem)
 }

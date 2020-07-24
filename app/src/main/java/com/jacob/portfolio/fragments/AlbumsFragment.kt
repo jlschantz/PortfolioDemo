@@ -54,7 +54,6 @@ class AlbumsFragment : Fragment(), AlbumsAdapter.OnItemClickListener{
     }
 
     private fun initRecyclerView() {
-        //Log.v(TAG,"initRecyclerView")
         val layoutManager : androidx.recyclerview.widget.RecyclerView.LayoutManager =
             androidx.recyclerview.widget.LinearLayoutManager(this.context)
         fragment_albums_rv_list.layoutManager = layoutManager
@@ -78,13 +77,10 @@ class AlbumsFragment : Fragment(), AlbumsAdapter.OnItemClickListener{
 
         albumsViewModel.getAlbums()!!
             .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                Log.v(TAG,"albums updated")
-                Log.v(TAG,"albums updated $it")
                 albumsLocal = it
             })
         albumsViewModel.getProgress()!!
             .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                Log.v(TAG,"albums displayed")
                 if (it == true) {
                     turnOnProgressBar()
                 } else {
@@ -100,20 +96,16 @@ class AlbumsFragment : Fragment(), AlbumsAdapter.OnItemClickListener{
     }
 
     private fun turnOnProgressBar(){
-        Log.v(TAG,"turnOnProgressBar")
         fragment_albums_rv_list.visibility = View.GONE
         fragment_albums_pb_progress.visibility = View.VISIBLE
     }
 
     private fun turnOffProgressBar(){
-        Log.v(TAG,"turnOffProgressBar")
         fragment_albums_rv_list.visibility = View.VISIBLE
         fragment_albums_pb_progress.visibility = View.GONE
     }
 
     private fun setupUsersDisplay() {
-        //Log.v(TAG, "setupOpeningsDisplay")
-
         albumsAdapter?.setItems(albumsLocal)
         turnOffProgressBar()
     }
@@ -130,8 +122,6 @@ class AlbumsFragment : Fragment(), AlbumsAdapter.OnItemClickListener{
     }
 
     private fun handleError() {
-        Log.v(TAG, "handleError")
-
         val builder = AlertDialog.Builder(context!!)
         builder.setMessage(getString(R.string.error_text))
         builder.setNeutralButton(getString(R.string.error_text_ok)){ dialog, which ->

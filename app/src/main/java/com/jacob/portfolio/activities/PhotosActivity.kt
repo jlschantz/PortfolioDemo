@@ -1,6 +1,7 @@
 package com.jacob.portfolio.activities
 
 import android.app.Application
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -18,6 +19,7 @@ import kotlinx.android.synthetic.main.activity_photos.*
 
 
 class PhotosActivity : AppCompatActivity(), PhotosAdapter.OnItemClickListener {
+
     private var TAG : String = "PhotosActivity"
     private var photosAdapter: PhotosAdapter? = null
     private lateinit var photosViewModel : PhotosViewModel
@@ -60,7 +62,6 @@ class PhotosActivity : AppCompatActivity(), PhotosAdapter.OnItemClickListener {
     }
 
     private fun initRecyclerView() {
-        //Log.v(TAG,"initRecyclerView")
         val numberOfColumns: Int = commonUtilities.calculateNoOfColumns(this,100)
         val layoutManager : androidx.recyclerview.widget.RecyclerView.LayoutManager =
             androidx.recyclerview.widget.GridLayoutManager(this, numberOfColumns)
@@ -85,13 +86,10 @@ class PhotosActivity : AppCompatActivity(), PhotosAdapter.OnItemClickListener {
 
         photosViewModel.getPhotos()!!
             .observe(this, androidx.lifecycle.Observer {
-                Log.v(TAG,"photos updated")
-                Log.v(TAG,"photos updated $it")
                 photosLocal = it
             })
         photosViewModel.getProgress()!!
             .observe(this, androidx.lifecycle.Observer {
-                Log.v(TAG,"photos displayed")
                 if (it == true) {
                     turnOnProgressBar()
                 } else {
@@ -103,24 +101,22 @@ class PhotosActivity : AppCompatActivity(), PhotosAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(photoItem: PhotoItem) {
-
+        val intent = Intent(this, PhotoDetailsActivity::class.java)
+        intent.putExtra("photoDetailUrl", photoItem.url)
+        startActivity(intent)
     }
 
     private fun turnOnProgressBar(){
-        Log.v(TAG,"turnOnProgressBar")
         activity_photos_rv_list.visibility = View.GONE
         activity_photos_pb_progress.visibility = View.VISIBLE
     }
 
     private fun turnOffProgressBar(){
-        Log.v(TAG,"turnOffProgressBar")
         activity_photos_rv_list.visibility = View.VISIBLE
         activity_photos_pb_progress.visibility = View.GONE
     }
 
     private fun setupUsersDisplay() {
-        //Log.v(TAG, "setupOpeningsDisplay")
-
         photosAdapter?.setItems(photosLocal)
         turnOffProgressBar()
     }
@@ -137,8 +133,6 @@ class PhotosActivity : AppCompatActivity(), PhotosAdapter.OnItemClickListener {
     }
 
     private fun handleError() {
-        Log.v(TAG, "handleError")
-
         val builder = AlertDialog.Builder(this)
         builder.setMessage(getString(R.string.error_text))
         builder.setNeutralButton(getString(R.string.error_text_ok)){ dialog, which ->

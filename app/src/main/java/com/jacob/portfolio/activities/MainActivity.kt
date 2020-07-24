@@ -24,9 +24,7 @@ class MainActivity : AppCompatActivity(),
     MainInterface {
 
     private var TAG : String = "MainActivity"
-
     private lateinit var actionBarDrawerToggle: ActionBarDrawerToggle
-
     private var currentFragment : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -58,8 +56,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        Log.v(TAG,"onNavigationItemSelected")
-
         when(item.itemId){
             R.id.nav_item_list -> {
                 val fragment = UsersFragment()
@@ -78,7 +74,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     override fun onBackPressed() {
-        Log.v(TAG,"onBackPressed")
         if (activity_main_drawer_layout.isDrawerOpen(GravityCompat.START)) {
             activity_main_drawer_layout.closeDrawer(GravityCompat.START)
         } else {
@@ -88,7 +83,6 @@ class MainActivity : AppCompatActivity(),
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        Log.v(TAG,"onSaveInstanceState")
         outState.putString("currentFragment", currentFragment)
     }
 
@@ -106,7 +100,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun doFragmentTransaction(fragment: Fragment, tag: String){
-        Log.v(TAG,"doFragmentTransaction")
         val transaction : FragmentTransaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.activity_main_fl_fragment_container,fragment,tag)
 
@@ -115,7 +108,6 @@ class MainActivity : AppCompatActivity(),
     }
 
     private fun setupFragment(savedInstanceState: Bundle?) {
-        Log.v(TAG,"setupSourceAndFragment")
         if(savedInstanceState == null){
             currentFragment = getString(R.string.fragment_users)
             val fragment = UsersFragment()
@@ -130,7 +122,7 @@ class MainActivity : AppCompatActivity(),
         startActivity(intent)
     }
 
-    override fun goToPhotosForUser(userItem: UserItem) {
+    override fun goToDetailForUser(userItem: UserItem) {
 
     }
 }
