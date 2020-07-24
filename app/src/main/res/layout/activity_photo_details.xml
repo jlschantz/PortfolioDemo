@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".activities.PhotoDetailsActivity"
+    android:orientation="vertical"
+    android:background="@color/colorAccent"
+    android:fitsSystemWindows="true">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/activity_photo_detail_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:title=" ">
+    </androidx.appcompat.widget.Toolbar>
+
+    <FrameLayout android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorDarkGrey">
+
+        <ImageView
+            android:id="@+id/activity_photo_detail_iv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <ProgressBar
+            android:id="@+id/activity_photo_detail_pb_progress"
+            android:background="@drawable/progress_bar_rounded"
+            android:indeterminate="true"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/activity_photo_detail_tv_empty"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:visibility="gone"
+            android:textColor="@color/colorWhite"
+            android:text="@string/no_data_available" />
+
+    </FrameLayout>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

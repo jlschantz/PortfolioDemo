@@ -53,7 +53,6 @@ class UsersFragment : Fragment(), UsersAdapter.OnItemClickListener {
     }
 
     private fun initRecyclerView() {
-        //Log.v(TAG,"initRecyclerView")
         val layoutManager : androidx.recyclerview.widget.RecyclerView.LayoutManager =
             androidx.recyclerview.widget.LinearLayoutManager(this.context)
         fragment_users_rv_list.layoutManager = layoutManager
@@ -76,13 +75,10 @@ class UsersFragment : Fragment(), UsersAdapter.OnItemClickListener {
         )
         usersViewModel.getUsers()!!
             .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                Log.v(TAG,"users updated")
-                Log.v(TAG,"users updated $it")
                 usersLocal = it
             })
         usersViewModel.getProgress()!!
             .observe(viewLifecycleOwner, androidx.lifecycle.Observer {
-                Log.v(TAG,"users displayed")
                 if (it == true) {
                     turnOnProgressBar()
                 } else {
@@ -94,23 +90,20 @@ class UsersFragment : Fragment(), UsersAdapter.OnItemClickListener {
     }
 
     override fun onItemClick(userItem: UserItem) {
-        mainInterface.goToPhotosForUser(userItem)
+        mainInterface.goToDetailForUser(userItem)
     }
 
     private fun turnOnProgressBar(){
-        Log.v(TAG,"turnOnProgressBar")
         fragment_users_rv_list.visibility = View.GONE
         fragment_users_pb_progress.visibility = View.VISIBLE
     }
 
     private fun turnOffProgressBar(){
-        Log.v(TAG,"turnOffProgressBar")
         fragment_users_rv_list.visibility = View.VISIBLE
         fragment_users_pb_progress.visibility = View.GONE
     }
 
     private fun setupUsersDisplay() {
-        //Log.v(TAG, "setupOpeningsDisplay")
         usersAdapter?.setItems(usersLocal)
 
         turnOffProgressBar()
@@ -128,8 +121,6 @@ class UsersFragment : Fragment(), UsersAdapter.OnItemClickListener {
     }
 
     private fun handleError() {
-        Log.v(TAG, "handleError")
-
         val builder = AlertDialog.Builder(context!!)
         builder.setMessage(getString(R.string.error_text))
         builder.setNeutralButton(getString(R.string.error_text_ok)){ dialog, which ->
